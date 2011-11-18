@@ -1,0 +1,6 @@
+category: Gnome
+requires: gnome-online-accounts libgcc1 libglib2.0_0 libgnome-keyring0 libgtk3_0 libjson-glib1.0_0 libpango1.0_0 librest0.7_0 libsoup2.4_1 libsoup-gnome2.4_1 libwebkitgtk3.0_0
+external-source: gnome-online-accounts
+sdesc: "GNOME online account manager client library (runtime)"
+ldesc: "GNOME Online Accounts is a framework used for GNOME applications 
+to access the user's online accounts."
