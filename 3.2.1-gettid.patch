@@ -1,28 +1,12 @@
 --- origsrc/gnome-online-accounts-3.2.1/src/goabackend/goalogging.c	2011-10-17 13:10:17.000000000 -0500
 +++ src/gnome-online-accounts-3.2.1/src/goabackend/goalogging.c	2011-11-17 19:52:53.008747000 -0600
-@@ -24,7 +24,12 @@
+@@ -24,7 +24,9 @@
  #include <glib/gi18n-lib.h>
  
  #include <sys/types.h>
-+#ifdef __CYGWIN__
-+#include <pthread.h>
-+unsigned long pthread_getsequence_np (pthread_t *);
-+#else
++#ifndef __CYGWIN__
  #include <sys/syscall.h>
 +#endif
  
  #include <syslog.h>
  
-@@ -207,7 +212,12 @@ goa_log (GoaLogLevel     level,
-       break;
-     }
- 
-+#ifdef __CYGWIN__
-+  pthread_t thread = pthread_self ();
-+  thread_str = g_strdup_printf ("%d", (gint) pthread_getsequence_np (&thread));
-+#else
-   thread_str = g_strdup_printf ("%d", (gint) syscall (SYS_gettid));
-+#endif
-   g_print ("%s%s%s.%03d:%s%s%s[%s]%s:%s%s%s:%s %s %s[%s, %s()]%s\n",
-            _color_get (_COLOR_BOLD_ON), _color_get (_COLOR_FG_YELLOW), time_buf, (gint) now.tv_usec / 1000, _color_get (_COLOR_RESET),
-            _color_get (_COLOR_FG_MAGENTA), _color_get (_COLOR_BOLD_ON), thread_str, _color_get (_COLOR_RESET),

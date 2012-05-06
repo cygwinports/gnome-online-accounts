@@ -23,3 +23,5 @@ libgoa1_0_devel_CONTENTS="usr/include/ usr/lib/lib* usr/lib/pkgconfig/ usr/share
 girepository_Goa1_0_CONTENTS="usr/*/gir*/Goa-1.0.*"
 
 CYGCONF_ARGS="--libexecdir=/usr/bin"
+
+KEEP_LA_FILES="none"
