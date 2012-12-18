@@ -1,6 +1,0 @@
-category: Gnome
-requires: libgoa1.0_0 girepository-GLib2.0
-external-source: gnome-online-accounts
-sdesc: "GNOME online account manager client library (GObject Introspection)"
-ldesc: "GNOME Online Accounts is a framework used for GNOME applications 
-to access the user's online accounts."
