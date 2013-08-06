@@ -1,9 +1,9 @@
 inherit gnome2
 
 NAME="gnome-online-accounts"
-VERSION=3.6.3
+VERSION=3.8.2
 RELEASE=1
-CATEGORY="GNOME"
+CATEGORY="Libs"
 SUMMARY="GNOME online account manager service"
 DESCRIPTION="GNOME Online Accounts is a framework used for GNOME applications
 to access the user's online accounts."
@@ -21,17 +21,22 @@ DEPEND="gnome-common gtk-doc intltool
 	pkgconfig(rest-0.7)
 	pkgconfig(webkitgtk-3.0)"
 
-PKG_NAMES="${PN} libgoa1.0_0 libgoa1.0-devel girepository-Goa1.0"
-gnome_online_accounts_CONTENTS="etc/ usr/bin/goa-daemon.exe usr/share/dbus-1/
+PKG_NAMES="${NAME} libgoa1.0_0 libgoa1.0-devel girepository-Goa1.0"
+gnome_online_accounts_CATEGORY="GNOME"
+gnome_online_accounts_CONTENTS="etc/ usr/libexec/ usr/share/dbus-1/
 	usr/share/doc/ usr/share/${NAME}/ usr/share/icons/ usr/share/locale/ usr/share/man/"
+libgoa1_0_0_REQUIRES=${NAME}
 libgoa1_0_0_CONTENTS="usr/bin/*-1.0-0.dll"
-libgoa1_0_devel_CONTENTS="usr/include/ usr/lib/lib* usr/lib/pkgconfig/ usr/share/gtk-doc/"
+libgoa1_0_devel_CONTENTS="usr/include/ usr/lib/goa-1.0/include/ usr/lib/lib*
+	usr/lib/pkgconfig/ usr/share/gtk-doc/"
 girepository_Goa1_0_CONTENTS="usr/*/gir*/Goa-1.0.*"
 
 CYGCONF_ARGS="
-	--libexecdir=/usr/bin
 	--enable-exchange
-	--enable-google
 	--enable-facebook
+	--enable-flickr
+	--enable-google
+	--enable-imap-smtp
+	--enable-owncloud
 	--enable-windows-live
 "
