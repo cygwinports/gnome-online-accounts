@@ -1,0 +1,29 @@
+--- origsrc/gnome-online-accounts-3.10.2/src/goa/Makefile.am	2014-03-19 20:48:42.314696000 -0500
++++ src/gnome-online-accounts-3.10.2/src/goa/Makefile.am	2014-03-19 18:07:50.318548200 -0500
+@@ -106,6 +106,7 @@ libgoa_1_0_la_LIBADD = 						\
+ 
+ libgoa_1_0_la_LDFLAGS = 					\
+ 	-version-info $(GOA_LT_VERSION)				\
++	-no-undefined						\
+ 	$(NULL)
+ 
+ # ----------------------------------------------------------------------------------------------------
+@@ -128,7 +129,7 @@ Goa-1.0.gir: $(libgoa_1_0_la_SOURCES)
+ 		--namespace Goa 				\
+ 		--nsversion=1.0 				\
+ 		--include=Gio-2.0 				\
+-		--library=goa-1.0	 			\
++		--library=libgoa-1.0.la	 			\
+ 		--output $@ 					\
+ 		--pkg=glib-2.0 					\
+ 		--pkg=gobject-2.0 				\
+--- origsrc/gnome-online-accounts-3.10.2/src/goabackend/Makefile.am	2014-03-19 20:48:44.574483000 -0500
++++ src/gnome-online-accounts-3.10.2/src/goabackend/Makefile.am	2014-03-19 18:09:49.735712200 -0500
+@@ -130,6 +130,7 @@ libgoa_backend_1_0_la_LIBADD = 					\
+ 
+ libgoa_backend_1_0_la_LDFLAGS = 				\
+ 	-version-info $(GOA_BACKEND_LT_VERSION)			\
++	-no-undefined						\
+ 	$(NULL)
+ 
+ # ----------------------------------------------------------------------------------------------------
