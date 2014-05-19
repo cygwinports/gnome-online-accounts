@@ -2,7 +2,7 @@ inherit gnome2
 
 NAME="gnome-online-accounts"
 VERSION=3.10.2
-RELEASE=1
+RELEASE=2
 CATEGORY="Libs"
 SUMMARY="GNOME online account manager service"
 DESCRIPTION="GNOME Online Accounts is a framework used for GNOME applications
@@ -37,7 +37,6 @@ libgoa1_0_doc_CATEGORY="Doc"
 libgoa1_0_doc_CONTENTS="usr/share/gtk-doc/"
 girepository_Goa1_0_CONTENTS="usr/*/gir*/Goa-1.0.*"
 
-# kerberos: only compatible with MIT krb5
 # twitter, yahoo: ToS may not allow FOSS "secret" keys
 # https://ask.fedoraproject.org/question/7762?answer=15431
 CYGCONF_ARGS="
@@ -46,6 +45,7 @@ CYGCONF_ARGS="
 	--enable-flickr
 	--enable-google
 	--enable-imap-smtp
+	--enable-kerberos
 	--enable-owncloud
 	--enable-telepathy
 	--enable-windows-live

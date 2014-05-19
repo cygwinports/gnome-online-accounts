@@ -27,3 +27,13 @@
  	$(NULL)
  
  # ----------------------------------------------------------------------------------------------------
+--- origsrc/gnome-online-accounts-3.10.2/src/goaidentity/Makefile.am	2013-11-12 09:55:47.000000000 -0600
++++ src/gnome-online-accounts-3.10.2/src/goaidentity/Makefile.am	2014-05-19 13:28:43.758686600 -0500
+@@ -115,6 +115,7 @@ libgoaidentity_la_CFLAGS =					\
+ 	$(NULL)
+ 
+ libgoaidentity_la_LIBADD = 					\
++	$(top_builddir)/src/goa/libgoa-1.0.la			\
+ 	$(GLIB_LIBS) 						\
+ 	$(GTK_LIBS)						\
+ 	$(KRB5_LIBS)						\
