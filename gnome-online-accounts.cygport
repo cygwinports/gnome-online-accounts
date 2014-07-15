@@ -1,8 +1,8 @@
 inherit gnome2
 
 NAME="gnome-online-accounts"
-VERSION=3.10.2
-RELEASE=3
+VERSION=3.10.5
+RELEASE=1
 CATEGORY="Libs"
 SUMMARY="GNOME online account manager service"
 DESCRIPTION="GNOME Online Accounts is a framework used for GNOME applications
