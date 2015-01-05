@@ -1,17 +1,16 @@
 inherit gnome2
 
 NAME="gnome-online-accounts"
-VERSION=3.10.5
-RELEASE=2
+VERSION=3.14.2
+RELEASE=1
 CATEGORY="Libs"
 SUMMARY="GNOME online account manager service"
 DESCRIPTION="GNOME Online Accounts is a framework used for GNOME applications
 to access the user's online accounts."
 
 PATCH_URI="
-	3.2.1-gettid.patch
-	3.10.2-no-undefined.patch
-	3.10.2-webkit110.patch
+	3.14.2-no-undefined.patch
+	3.14.2-webkit110.patch
 "
 
 DEPEND="gnome-common gtk-doc intltool
@@ -27,7 +26,8 @@ DEPEND="gnome-common gtk-doc intltool
 PKG_NAMES="${NAME} libgoa1.0_0 libgoa-backend1.0_1 libgoa1.0-devel libgoa1.0-doc girepository-Goa1.0"
 gnome_online_accounts_CATEGORY="GNOME"
 gnome_online_accounts_CONTENTS="etc/ usr/libexec/ usr/share/dbus-1/
-	usr/share/doc/ usr/share/${NAME}/ usr/share/icons/ usr/share/locale/ usr/share/man/"
+	usr/share/doc/ usr/share/glib-2.0/schemas/ usr/share/${NAME}/
+	usr/share/icons/ usr/share/locale/ usr/share/man/"
 libgoa1_0_0_REQUIRES=${NAME}
 libgoa1_0_0_CONTENTS="usr/bin/cyggoa-1.0-0.dll"
 libgoa_backend1_0_1_CONTENTS="usr/bin/cyggoa-backend-1.0-1.dll"
@@ -47,6 +47,7 @@ CYGCONF_ARGS="
 	--enable-imap-smtp
 	--enable-kerberos
 	--enable-owncloud
+	--enable-pocket
 	--enable-telepathy
 	--enable-windows-live
 "

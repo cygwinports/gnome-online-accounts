@@ -1,0 +1,39 @@
+--- origsrc/gnome-online-accounts-3.14.2/src/goa/Makefile.am	2014-11-12 08:14:32.000000000 -0600
++++ src/gnome-online-accounts-3.14.2/src/goa/Makefile.am	2015-01-04 22:28:21.283068400 -0600
+@@ -105,6 +105,7 @@ libgoa_1_0_la_LIBADD = 						\
+ 
+ libgoa_1_0_la_LDFLAGS = 					\
+ 	-version-info $(GOA_LT_VERSION)				\
++	-no-undefined						\
+ 	$(NULL)
+ 
+ # ----------------------------------------------------------------------------------------------------
+@@ -119,7 +120,7 @@ Goa-1.0.gir: libgoa-1.0.la
+ Goa_1_0_gir_INCLUDES = Gio-2.0
+ Goa_1_0_gir_PACKAGES = glib-2.0 gobject-2.0 gio-2.0
+ Goa_1_0_gir_EXPORT_PACKAGES = goa-1.0
+-Goa_1_0_gir_LIBS = goa-1.0
++Goa_1_0_gir_LIBS = libgoa-1.0.la
+ Goa_1_0_gir_FILES = $(libgoa_1_0_la_HEADERS) $(libgoa_1_0_la_SOURCES)
+ Goa_1_0_gir_CFLAGS = $(AM_CPPFLAGS) $(libgoa_1_0_la_CFLAGS)
+ Goa_1_0_gir_SCANNERFLAGS = --c-include='goa/goa.h'
+--- origsrc/gnome-online-accounts-3.14.2/src/goabackend/Makefile.am	2014-11-12 08:14:32.000000000 -0600
++++ src/gnome-online-accounts-3.14.2/src/goabackend/Makefile.am	2015-01-04 22:28:37.124580000 -0600
+@@ -158,6 +158,7 @@ libgoa_backend_1_0_la_LIBADD = 					\
+ 
+ libgoa_backend_1_0_la_LDFLAGS = 				\
+ 	-version-info $(GOA_BACKEND_LT_VERSION)			\
++	-no-undefined						\
+ 	$(NULL)
+ 
+ # ----------------------------------------------------------------------------------------------------
+--- origsrc/gnome-online-accounts-3.14.2/src/goaidentity/Makefile.am	2014-11-12 08:14:32.000000000 -0600
++++ src/gnome-online-accounts-3.14.2/src/goaidentity/Makefile.am	2015-01-04 22:28:57.306142700 -0600
+@@ -112,6 +112,7 @@ libgoaidentity_la_CFLAGS =					\
+ 	$(NULL)
+ 
+ libgoaidentity_la_LIBADD = 					\
++	$(top_builddir)/src/goa/libgoa-1.0.la			\
+ 	$(GLIB_LIBS) 						\
+ 	$(GTK_LIBS)						\
+ 	$(KRB5_LIBS)						\
