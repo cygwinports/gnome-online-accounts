@@ -1,0 +1,15 @@
+These sources are also linked into libgoa-backend-1.0.la, resulting
+in errors from attempting multiple instantiations of the same 
+GoaIdentity objects
+
+--- origsrc/gnome-online-accounts-3.14.3/src/goaidentity/Makefile.am	2015-01-16 10:50:45.000000000 -0600
++++ src/gnome-online-accounts-3.14.3/src/goaidentity/Makefile.am	2015-02-12 00:43:59.862641700 -0600
+@@ -99,8 +99,6 @@ noinst_LTLIBRARIES = libgoaidentity.la
+ 
+ libgoaidentity_la_SOURCES = 					\
+ 	goaidentityenumtypes.h		goaidentityenumtypes.c	\
+-	$(identity_dbus_built_sources)				\
+-	$(realmd_dbus_built_sources)				\
+ 	$(identity_sources)					\
+ 	$(NULL)
+ 

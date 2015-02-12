@@ -1,3 +1,34 @@
+--- origsrc/gnome-online-accounts-3.14.3/src/daemon/Makefile.am	2015-01-16 10:50:45.000000000 -0600
++++ src/gnome-online-accounts-3.14.3/src/daemon/Makefile.am	2015-02-12 00:44:43.979743800 -0600
+@@ -40,12 +40,6 @@ goa_daemon_CFLAGS =						\
+ 	$(NULL)
+ 
+ goa_daemon_LDADD = 						\
+-	$(GLIB_LIBS) 						\
+-	$(top_builddir)/src/goa/libgoa-1.0.la			\
+-	$(top_builddir)/src/goabackend/libgoa-backend-1.0.la	\
+-	$(GTK_LIBS)						\
+-	$(REST_LIBS)						\
+-	$(TP_LIBS)						\
+ 	$(NULL)
+ 
+ if BUILD_KERBEROS
+@@ -56,6 +50,15 @@ goa_daemon_LDADD += 						\
+ 	$(NULL)
+ endif
+ 
++goa_daemon_LDADD += 						\
++	$(GLIB_LIBS) 						\
++	$(top_builddir)/src/goa/libgoa-1.0.la			\
++	$(top_builddir)/src/goabackend/libgoa-backend-1.0.la	\
++	$(GTK_LIBS)						\
++	$(REST_LIBS)						\
++	$(TP_LIBS)						\
++	$(NULL)
++
+ clean-local :
+ 	rm -f *~
+ 
 --- origsrc/gnome-online-accounts-3.14.2/src/goa/Makefile.am	2014-11-12 08:14:32.000000000 -0600
 +++ src/gnome-online-accounts-3.14.2/src/goa/Makefile.am	2015-01-04 22:28:21.283068400 -0600
 @@ -105,6 +105,7 @@ libgoa_1_0_la_LIBADD = 						\
@@ -27,13 +58,3 @@
  	$(NULL)
  
  # ----------------------------------------------------------------------------------------------------
---- origsrc/gnome-online-accounts-3.14.2/src/goaidentity/Makefile.am	2014-11-12 08:14:32.000000000 -0600
-+++ src/gnome-online-accounts-3.14.2/src/goaidentity/Makefile.am	2015-01-04 22:28:57.306142700 -0600
-@@ -112,6 +112,7 @@ libgoaidentity_la_CFLAGS =					\
- 	$(NULL)
- 
- libgoaidentity_la_LIBADD = 					\
-+	$(top_builddir)/src/goa/libgoa-1.0.la			\
- 	$(GLIB_LIBS) 						\
- 	$(GTK_LIBS)						\
- 	$(KRB5_LIBS)						\
