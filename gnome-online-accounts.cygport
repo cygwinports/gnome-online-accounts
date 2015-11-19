@@ -1,7 +1,7 @@
 inherit gnome2
 
 NAME="gnome-online-accounts"
-VERSION=3.14.4
+VERSION=3.18.2.1
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="GNOME online account manager service"
@@ -9,9 +9,8 @@ DESCRIPTION="GNOME Online Accounts is a framework used for GNOME applications
 to access the user's online accounts."
 
 PATCH_URI="
-	3.14.3-as-needed.patch
 	3.14.2-no-undefined.patch
-	3.14.2-webkit110.patch
+	3.18.2-webkit110.patch
 "
 
 DEPEND="gnome-common gtk-doc intltool
