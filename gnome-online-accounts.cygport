@@ -1,7 +1,7 @@
 inherit gnome2
 
 NAME="gnome-online-accounts"
-VERSION=3.18.2.1
+VERSION=3.18.3
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="GNOME online account manager service"

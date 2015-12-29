@@ -1,3 +1,5 @@
+This only works with our patched 2.0.4 with 2.2 APIs.
+
 --- origsrc/gnome-online-accounts-3.18.2.1/configure.ac	2015-11-11 10:13:02.000000000 -0600
 +++ src/gnome-online-accounts-3.18.2.1/configure.ac	2015-11-18 21:20:24.775954700 -0600
 @@ -105,7 +105,7 @@ if test "$enable_backend" != "no"; then
@@ -5,7 +7,7 @@
    AC_SUBST(GTK_LIBS)
  
 -  PKG_CHECK_MODULES(WEBKIT_GTK, [webkit2gtk-4.0 >= 2.7.2])
-+  PKG_CHECK_MODULES(WEBKIT_GTK, [webkitgtk-3.0])
++  PKG_CHECK_MODULES(WEBKIT_GTK, [webkitgtk-3.0 >= 2.0.4])
    AC_SUBST(WEBKIT_GTK_CFLAGS)
    AC_SUBST(WEBKIT_GTK_LIBS)
  
@@ -87,39 +89,6 @@
  BUILT_SOURCES =								\
  	$(libgoa_backend_1_0_la_built_sources)				\
  	$(NULL)
---- origsrc/gnome-online-accounts-3.18.2.1/src/goabackend/goaflickrprovider.c	2015-10-27 12:42:49.000000000 -0500
-+++ src/gnome-online-accounts-3.18.2.1/src/goabackend/goaflickrprovider.c	2015-11-18 21:20:30.415670900 -0600
-@@ -268,7 +268,7 @@ get_identity_sync (GoaOAuthProvider  *oa
- static gboolean
- is_deny_node (GoaOAuthProvider *oauth_provider, WebKitDOMNode *node)
- {
--  WebKitDOMElement *element;
-+  WebKitDOMHTMLElement *element;
-   gboolean ret;
-   gchar *id;
- 
-@@ -278,8 +278,8 @@ is_deny_node (GoaOAuthProvider *oauth_pr
-   if (!WEBKIT_DOM_IS_HTML_ANCHOR_ELEMENT (node))
-     goto out;
- 
--  element = WEBKIT_DOM_ELEMENT (node);
--  id = webkit_dom_element_get_id (element);
-+  element = WEBKIT_DOM_HTML_ELEMENT (node);
-+  id = webkit_dom_html_element_get_id (element);
-   if (g_strcmp0 (id, "auth-disallow") != 0)
-     goto out;
- 
---- origsrc/gnome-online-accounts-3.18.2.1/src/goabackend/goagoogleprovider.c	2015-10-27 12:42:49.000000000 -0500
-+++ src/gnome-online-accounts-3.18.2.1/src/goabackend/goagoogleprovider.c	2015-11-18 21:20:30.420171400 -0600
-@@ -288,7 +288,7 @@ is_identity_node (GoaOAuth2Provider *oau
-   if (g_strcmp0 (element_type, "email") != 0)
-     goto out;
- 
--  id = webkit_dom_element_get_id (WEBKIT_DOM_ELEMENT (element));
-+  id = webkit_dom_html_element_get_id (WEBKIT_DOM_HTML_ELEMENT (element));
-   if (g_strcmp0 (id, "Email") != 0)
-     goto out;
- 
 --- origsrc/gnome-online-accounts-3.18.2.1/src/goabackend/goaoauth2provider.c	2015-11-11 04:24:58.000000000 -0600
 +++ src/gnome-online-accounts-3.18.2.1/src/goabackend/goaoauth2provider.c	2015-11-18 21:17:27.298918000 -0600
 @@ -23,7 +23,7 @@
@@ -486,43 +455,6 @@
  };
  
  GType        goa_oauth_provider_get_type                     (void) G_GNUC_CONST;
---- origsrc/gnome-online-accounts-3.18.2.1/src/goabackend/goapocketprovider.c	2015-10-27 12:42:49.000000000 -0500
-+++ src/gnome-online-accounts-3.18.2.1/src/goabackend/goapocketprovider.c	2015-11-18 21:20:30.424672000 -0600
-@@ -255,7 +255,7 @@ get_identity_sync (GoaOAuth2Provider  *o
- static gboolean
- is_deny_node (GoaOAuth2Provider *oauth2_provider, WebKitDOMNode *node)
- {
--  WebKitDOMElement *element;
-+  WebKitDOMHTMLElement *element;
-   gboolean ret;
-   gchar *id;
-   gchar *class;
-@@ -266,13 +266,13 @@ is_deny_node (GoaOAuth2Provider *oauth2_
-   text = NULL;
-   ret = FALSE;
- 
--  if (!WEBKIT_DOM_IS_ELEMENT (node))
-+  if (!WEBKIT_DOM_IS_HTML_ELEMENT (node))
-     goto out;
- 
--  element = WEBKIT_DOM_ELEMENT (node);
-+  element = WEBKIT_DOM_HTML_ELEMENT (node);
- 
-   /* Desktop version */
--  id = webkit_dom_element_get_id (element);
-+  id = webkit_dom_html_element_get_id (element);
-   if (g_strcmp0 (id, "denyButton") == 0)
-     {
-       ret = TRUE;
-@@ -280,7 +280,7 @@ is_deny_node (GoaOAuth2Provider *oauth2_
-     }
- 
-   /* Mobile version */
--  class = webkit_dom_element_get_class_name (element);
-+  class = webkit_dom_html_element_get_class_name (element);
-   if (g_strcmp0 (class, "toolbarButton") != 0)
-     goto out;
- 
 --- origsrc/gnome-online-accounts-3.18.2.1/src/goabackend/goawebview.c	2015-10-27 12:42:49.000000000 -0500
 +++ src/gnome-online-accounts-3.18.2.1/src/goabackend/goawebview.c	2015-11-18 21:17:29.625713400 -0600
 @@ -1,7 +1,6 @@
