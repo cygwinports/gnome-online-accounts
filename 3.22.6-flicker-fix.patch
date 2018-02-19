@@ -1,0 +1,48 @@
+From bc0f014056cbd63064515db6505ce664116b4c70 Mon Sep 17 00:00:00 2001
+From: Debarshi Ray <debarshir@gnome.org>
+Date: Tue, 8 Aug 2017 15:28:37 +0200
+Subject: flickr: Make it show the permissions page after login
+
+... instead of the user's Flickr home page.
+
+Changing the OAuth endpoints to the documented www.flickr.com, instead
+of m.flickr.com, fixes the problem. Both present the same compact UI,
+so there is no need to explicitly ask for the mobile version of it.
+
+This reverts commit 219b3d72ca3e05cbb35417619637f0ff1512a9fa
+
+https://bugzilla.gnome.org/show_bug.cgi?id=786007
+---
+ src/goabackend/goaflickrprovider.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/goabackend/goaflickrprovider.c b/src/goabackend/goaflickrprovider.c
+index 0b087c0..5010ce3 100644
+--- a/src/goabackend/goaflickrprovider.c
++++ b/src/goabackend/goaflickrprovider.c
+@@ -105,19 +105,19 @@ get_consumer_secret (GoaOAuthProvider *oauth_provider)
+ static const gchar *
+ get_request_uri (GoaOAuthProvider *oauth_provider)
+ {
+-  return "https://m.flickr.com/services/oauth/request_token";
++  return "https://www.flickr.com/services/oauth/request_token";
+ }
+ 
+ static const gchar *
+ get_authorization_uri (GoaOAuthProvider *oauth_provider)
+ {
+-  return "https://m.flickr.com/services/oauth/authorize";
++  return "https://www.flickr.com/services/oauth/authorize";
+ }
+ 
+ static const gchar *
+ get_token_uri (GoaOAuthProvider *oauth_provider)
+ {
+-  return "https://m.flickr.com/services/oauth/access_token";
++  return "https://www.flickr.com/services/oauth/access_token";
+ }
+ 
+ static const gchar *
+-- 
+cgit v0.12
+
